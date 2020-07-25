@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button class="btn btn-default"  onclick="Myfunction('phn',false)"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" value="1" id="phn-input">
+                           <button class="btn btn-default" onclick="Myfunction('phn',true)"><i class="fas fa-plus"></i></button> 
+                        </div>
+                        <h5>$<span id="phn_price">00</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button class="btn btn-default" onclick="Myfunction('case',false)"><i class="fas fa-minus"></i></button>
+                           <input type="text" class="form-control text-center" value="1" id="case-input">
+                           <button onclick="Myfunction('case',true)"  class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5> $<span id="case_price">00</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax(10%) :</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5 id="totalprice">$00</h5>
+                        <h5 id="tax">$0</h5>
+                        <h5 id="grandTotal">$00</h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+</body>
+ 
+
+<script>
+   
+    function Myfunction( product,isInrease)
+   {
+    var input = document.getElementById( product+"-input");
+
+      var inputValue = parseInt (input.value);
+         
+         var inputTotal=inputValue;
+         
+      if (isInrease==true)
+      {
+         inputTotal=inputValue+1;
+      }
+      else if ( isInrease==false && inputTotal>0){
+                
+        inputTotal=inputValue-1;
+      }
+
+      document.getElementById(product+"-input").value= inputTotal;
+
+      var case_price = document.getElementById(product+"_price").innerText;
+
+           var case_price_value =parseInt(case_price);
+           if (product=="phn")
+           {
+            document.getElementById(product+"_price").innerText=inputTotal*200; 
+           }
+             else if (product=="case")
+             {
+               document.getElementById(product+"_price").innerText=inputTotal*59; 
+             }
+     
+     
+             total();
+      
+
+
+   };
+
+
+   function total()
+   {
+      var a = document.getElementById("phn-input");
+             var bc = parseInt(a.value);
+           
+
+      var b = document.getElementById("case-input");
+       var ca = parseInt (b.value);
+       
+
+       var price = document.getElementById("totalprice").innerText;
+      //  var price_number= parseInt(price);
+       var total =ca*59 + bc*200;
+      var c=  document.getElementById("totalprice").innerText=total;
+          
+          var tax =c*0.10;
+
+        var taxtotal= document.getElementById("tax").innerText=tax;
+        var tax1=parseInt(taxtotal);
+
+        var d=document.getElementById("grandTotal").innerText;
+        var grandTotal = parseInt(d);
+
+        document.getElementById("grandTotal").innerText=total +tax1;
+
+   }
+   
+
+</script>
+
+</html>
